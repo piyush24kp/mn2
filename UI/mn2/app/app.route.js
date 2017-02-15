@@ -10,12 +10,12 @@ this route provider for gust and member users
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/home', {
-                templateUrl: 'GB/app/layout/screens/home/home.tmpl.html',
+                templateUrl: 'mn2/app/layout/screens/home/home.tmpl.html',
                 controller: 'homeCtr',
                 controllerAs: 'vm',
             })
             .when('/login', {
-                templateUrl: 'GB/app/layout/screens/login/login.tmpl.html',
+                templateUrl: 'mn2/app/layout/screens/login/login.tmpl.html',
                 controller: 'loginCtr',
                 controllerAs: 'vm',
             })

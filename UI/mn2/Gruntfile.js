@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                 paths: ['app/']
             },
             files: {
-                "assets/css/gb.css": 'assets/css/main.less'
+                "assets/css/mn2.css": 'assets/css/main.less'
             }
         }
     });
