@@ -1,0 +1,154 @@
+
+<div class="container" style="background: whitesmoke;opacity: 0.8;">
+	<div class="col-lg-12">
+		<h1 style="text-align: center; color: #5f4433;">Welcome to GB</h1>
+		<div class="col-lg-4">
+			<h2>Enter Person Name :</h2>
+		</div>
+		<div class="col-lg-8">
+			<md-autocomplete
+	          md-search-text-change="vm.searchUser(vm.searchText)"
+	          md-selected-item-change="vm.myFamily(item.uId)"
+	          md-search-text="vm.searchText"
+	          md-items="item in vm.allUsers"
+	          md-item-text="item.firstName +' '+item.lastName"
+	          placeholder="Get Details" style="background: #ccc4c3;">
+	        <md-item-template>
+	          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.firstName}} {{item.lastName}}</span>
+	        </md-item-template>
+	        <md-not-found>
+	          No states matching "{{vm.searchText}}" were found.
+	        </md-not-found>
+	      </md-autocomplete>
+		</div>
+
+	</div>
+	<div class="col-lg-12  col-md-12" style="text-align: center;background: #696a6b;margin-top: 25px;margin-bottom: 25px;" 
+	ng-if="vm.userDetail">
+
+		<div class="col-lg-9 col-md-9"> 
+		<div class="col-lg-12 col-md-12" style="margin: 50px 0px 0px 0px;">
+
+
+			<div ng-repeat="user in vm.userDetail" class="col-lg-12 col-md-12"> 
+				
+				<div class="col-lg-6 col-md-6">
+					<div ng-if= "user.fatherName">
+						<div style="font-size: 14px;" class="label">Father :</div>
+						<md-button class="md-raised" ng-click="vm.myFamily(user.fatherName.uid)">{{user.fatherName.firstName}} {{user.fatherName.lastname}}</md-button>
+						<!-- <button class="btn btn-default" ></button> -->
+					</div>
+					<div ng-if= "!user.fatherName">
+						<div style="font-size: 14px;" class="label">Father :</div>
+						<md-button class="md-raised" ng-disabled="true">No Required Found</md-button>
+					</div>
+				</div>
+				
+				<div class="col-lg-6 col-md-6">
+					<div ng-if= "user.motherName">
+						<div style="font-size: 14px;" class="label">Mother :</div>
+						<md-button class="md-raised" ng-click="vm.myFamily(user.motherName.uid)">{{user.motherName.firstName}} {{user.motherName.lastname}}</md-button>
+						<!-- <button class="btn btn-default" ng-click="vm.myFamily(user.motherName.uid)">{{user.motherName.firstName}} {{user.motherName.lastname}}</button> -->
+					</div>
+					<div ng-if= "!user.motherName">
+						<div style="font-size: 14px;" class="label">Mother :</div>
+						<md-button class="md-raised" ng-disabled="true">No Required Found</md-button>
+					</div>
+
+				</div>
+				<div ng-if="!user.fatherName && !user.motherName" class="col-lg-8 col-lg-offset-2" style="color: white;">
+				No Record Found.Please contact <a href="" style="color: #a0d3ff;">GB Admin</a> for adding your data.</div>
+			</div>
+
+
+
+		</div>
+
+		<svg height="40" width="50%" ng-if="!vm.userDetail[0].spouseName">
+		  <polyline points="25,0 25,15 400,15 400,0 400,15 260,15 260,40" style="fill:transparent;stroke:#721d1d;stroke-width:4">
+		  </polyline>	
+		</svg>
+
+		<svg height="40" width="50%" ng-if="vm.userDetail[0].spouseName">
+		  <polyline points="25,0 25,15 400,15 400,0 400,15 60,15 60,40" style="fill: transparent;stroke:#721d1d;stroke-width:4;"></polyline>
+		</svg>
+
+		<div class="col-lg-12 col-md-12">
+
+			<div class="" ng-if="vm.userDetail && vm.userDetail[0].firstName">
+				<div class="col-lg-12" ng-class="{'col-lg-6':vm.userDetail[0].spouseName}">
+				<div style="font-size: 14px;" class="label">Person Name :</div>
+				<md-button class="md-raised md-primary" ng-click="vm.myFamily(vm.userDetail[0].uid)">{{vm.userDetail[0].firstName}} {{vm.userDetail[0].lastname}}</md-button>
+				</div>
+				<div class="col-lg-6" ng-if="vm.userDetail[0].spouseName">
+				<div style="font-size: 14px;" class="label">Spouse Name :</div>
+				<md-button class="md-raised md-warn" ng-click="vm.myFamily(vm.userDetail[0].spouseName.uid)">{{vm.userDetail[0].spouseName.firstName}} {{vm.userDetail[0].spouseName.lastname}}</md-button>
+				</div>
+				
+			</div>
+		</div>
+
+		<svg height="40" width="50%" ng-if="vm.userDetail[0].childrens.length == 3" class="">
+		  <polyline points="60,0 60,20 4,20 4,40 4,20 200,20 200,40 200,20 400,20 400,40 400,0" style="fill:transparent;stroke:#721d1d;stroke-width:4">
+		  </polyline>	
+		</svg>
+		<svg height="40" width="50%" ng-if="vm.userDetail[0].childrens.length == 2" class="">
+		  <polyline points="60,0 60,20 4,20 4,40 4,20 400,20 400,40 400,0" style="fill:transparent;stroke:#721d1d;stroke-width:4">
+		  </polyline>	
+		</svg>
+
+		<svg height="40" width="50%" ng-if="vm.userDetail[0].childrens.length == 1" class="">
+		  <polyline points="60,0 60,20 200,20 200,40 200,20 382,20 382,0" style="fill:transparent;stroke:#721d1d;stroke-width:4">
+		  </polyline>	
+		</svg>
+		<svg height="40" width="65%" ng-if="vm.userDetail[0].childrens.length == 4" class="">
+		  <polyline points="60,0 60,20 4,20 4,40 4,20 200,20 200,40 200,20 380,20 380,40 380,20 518,20 518,0 518,40" style="fill:transparent;stroke:#721d1d;stroke-width:4">
+		  </polyline>	
+		</svg>
+
+		<div class="col-lg-12 col-md-12" style="margin: 0px 0px 50px 0px;">
+		<div ng-repeat="user in vm.userDetail" class="col-lg-12 col-md-12"> 
+				
+				<div class="" ng-repeat="child in user.childrens" 
+				ng-class="{'col-lg-5':vm.userDetail[0].childrens.length == 5,'col-lg-3':vm.userDetail[0].childrens.length == 4,'col-lg-4':vm.userDetail[0].childrens.length == 3,'col-lg-6':vm.userDetail[0].childrens.length == 2,'col-lg-12':vm.userDetail[0].childrens.length == 1
+							}">
+					<div ng-if= "child.firstName">
+						<md-button class="md-raised" ng-click="vm.myFamily(child.uid)">{{child.firstName}} {{child.lastname}}</md-button>
+						<!-- <button class="btn btn-default" ng-click="vm.myFamily(child.uid)">{{child.firstName}} {{child.lastname}}</button> -->
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		</div>
+
+		<div class="col-lg-3 col-lg-3" style="margin: 50px 0px;" ng-if="vm.userDetail[0].siblings.length > 0">
+			<h2 style="color:white">Siblings</h2>
+			<div class="col-lg-12" ng-repeat="sibling in vm.userDetail[0].siblings">
+					<div ng-if="sibling.firstName">
+						<md-button class="md-raised" ng-click="vm.myFamily(sibling.uid)">{{sibling.firstName}} {{sibling.lastname}}</md-button>
+						<!-- <button class="btn btn-default" ng-click="vm.myFamily(child.uid)">{{child.firstName}} {{child.lastname}}</button> -->
+					</div>
+				</div>
+
+		</div>		
+	</div>
+
+</div>
+
+<div class="container" style="background: whitesmoke;opacity: 0.8;margin:25px auto;">
+
+	<div class="col-lg-12 col-md-12" style="text-align: center;background: #696a6b;margin-top: 25px;margin-bottom: 25px;padding:0px;">
+
+		<div uib-carousel active="vm.active" interval="vm.myInterval" no-wrap="vm.noWrapSlides">
+	      <div uib-slide ng-repeat="slide in vm.slides track by slide.id" index="slide.id">
+	        <img width="100%" ng-src="{{slide.image}}" style="margin:auto;">
+	        <div class="carousel-caption">
+	          <h4>Slide {{slide.id}}</h4>
+	          <p>{{slide.text}}</p>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</div>
